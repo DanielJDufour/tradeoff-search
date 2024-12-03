@@ -21,6 +21,8 @@ jobs:
       - run: cd data && sh ./setup.sh
 
       - run: ls ./data/random-sketches
+
+      - run: sudo systemctl start postgresql.service
       
       - run: sh ./run.sh
 
