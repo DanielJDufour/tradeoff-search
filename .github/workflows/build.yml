@@ -1,0 +1,30 @@
+name: run-main
+run-name: run-main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    name: main
+    steps:
+      - run: apt-get update
+
+      - run: apt-get install -y git
+
+      - uses: actions/checkout@v3
+
+      - run: cd data && sh ./setup.sh
+
+      - run: ls ./data/random-sketches
+      
+      - run: sh ./run.sh
+
+      - run: ls
+
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5
