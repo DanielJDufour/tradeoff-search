@@ -36,7 +36,7 @@ jobs:
       
       - run: apt-cache search postgresql
 
-      - run: sudo apt-get install -y build-essential curl git pgxnclient
+      - run: sudo apt-get install -y build-essential curl git pgxnclient postgresql-server-dev-14
 
       - run: pgxn install postgis
 
