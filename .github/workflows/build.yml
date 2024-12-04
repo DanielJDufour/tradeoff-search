@@ -13,7 +13,7 @@ jobs:
     name: main
     services:
       db:
-        image: postgis
+        image: postgis/postgis
         env:
           POSTGRES_DB: "seasketch"
           POSTGRES_HOST_AUTH_METHOD: "trust"          
