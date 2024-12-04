@@ -12,8 +12,8 @@ jobs:
       contents: write
     name: main
     services:
-      postgres:
-        image: postgres
+      db:
+        image: postgis
         env:
           POSTGRES_DB: "seasketch"
           POSTGRES_HOST_AUTH_METHOD: "trust"          
