@@ -39,8 +39,6 @@ jobs:
       - run: cd data/random-sketches && sh ./setup.sh
 
       - run: ls ./data/random-sketches
-
-      - run: sudo systemctl start postgresql.service
       
       - run: sh ./run.sh
 
