@@ -20,6 +20,7 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_DB: "seasketch"
+          POSTGRES_HOST_AUTH_METHOD: "trust"          
           POSTGRES_USER: "postgres"
           POSTGRES_PASSWORD: "password"
         ports:
@@ -32,10 +33,8 @@ jobs:
           --health-retries 5
     steps:
       - name: Test database connection
-        run: PGPASSWORD=password psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
-        env:
-          PGPASSWORD: password
-    
+        run: psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
+
       - run: sudo apt-get update
 
       - run: sudo apt-get install -y git
