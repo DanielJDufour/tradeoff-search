@@ -42,10 +42,6 @@ jobs:
       
       - run: sudo apt-get install -y pgxnclient postgresql-14 postgresql-14-postgis-3 postgresql-server-dev-14
 
-      - run: pgxn install postgis
-
-      - run: pgxn load postgis
-
       - uses: actions/checkout@v3
 
       - run: cd data/random-sketches && sh ./setup.sh
