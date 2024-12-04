@@ -44,7 +44,7 @@ jobs:
 
       - run: sudo pgxn install h3
 
-      - run: pgxn -d seasketch -h 127.0.0.1 -U postgres load h3
+      - run: pgxn load -d seasketch -h 127.0.0.1 -U postgres h3
 
       - uses: actions/checkout@v3
 
