@@ -32,7 +32,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Test database connection
-        run: PGPASSWORD=password psql -h postgres -d seasketch -U postgres -c 'SELECT 1;'
+        run: PGPASSWORD=password psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
         env:
           PGPASSWORD: password
     
