@@ -11,18 +11,13 @@ jobs:
     permissions:
       contents: write
     name: main
-        # Service containers to run with `container-job`
     services:
-      # Label used to access the service container
       postgres:
-        # Docker Hub image
         image: postgres
-        # Provide the password for postgres
         env:
           POSTGRES_DB: "seasketch"
           POSTGRES_HOST_AUTH_METHOD: "trust"          
           POSTGRES_USER: "postgres"
-          POSTGRES_PASSWORD: "password"
         ports:
           - 5432:5432          
         # Set health checks to wait until postgres has started
@@ -37,13 +32,13 @@ jobs:
 
       - run: sudo apt-get update
 
-      - run: sudo apt-get install -y git
+      - run: sudo apt-get install -y build-essential curl git postgresql-server-dev-16 postgresql-16-h3 pgxnclient
 
       - uses: actions/checkout@v3
 
-      #- run: cd data/random-sketches && sh ./setup.sh
+      - run: cd data/random-sketches && sh ./setup.sh
 
-      #- run: ls ./data/random-sketches
+      - run: ls ./data/random-sketches
       
       - run: sh ./run.sh
 
