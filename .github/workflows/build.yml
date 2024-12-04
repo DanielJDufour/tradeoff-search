@@ -20,8 +20,6 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_DB: "seasketch"
-          POSTGREST_HOST: "postgres"
-          # POSTGRES_HOST_AUTH_METHOD: "trust"
           POSTGRES_USER: "postgres"
           POSTGRES_PASSWORD: "password"
         ports:
@@ -34,7 +32,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Test database connection
-        run: psql -h postgres -d seasketch -U postgres -c 'SELECT 1;'
+        run: PGPASSWORD=password psql -h postgres -d seasketch -U postgres -c 'SELECT 1;'
         env:
           PGPASSWORD: password
     
