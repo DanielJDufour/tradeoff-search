@@ -44,6 +44,8 @@ jobs:
 
       - run: sudo pgxn install h3
 
+      - run: pgxn load h3
+
       - uses: actions/checkout@v3
 
       - run: cd data/random-sketches && sh ./setup.sh
