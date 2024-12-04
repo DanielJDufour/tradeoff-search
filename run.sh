@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-./scripts/create_extensions.sh
+sh -c "cd ./scripts && ./create_extensions.sh"
