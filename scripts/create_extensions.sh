@@ -2,4 +2,4 @@
 
 sudo systemctl start postgresql.service
 
-psql -h 0.0.0.0 -p 5432 --username postgres < ../sql/create_extensions.sql
+psql -h 0.0.0.0 -p 5432 --username postgres seasketch < ../sql/create_extensions.sql
