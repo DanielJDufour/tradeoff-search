@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: postgis/postgis
     permissions:
       contents: write
     name: main
@@ -27,6 +26,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
       - run: sudo lsb_release -a 
     
@@ -45,7 +45,7 @@ jobs:
 
       - run: sudo pgxn install h3
 
-      - run: pgxn load -d seasketch -h 127.0.0.1 -U postgres h3
+      - run: sudo pgxn load -d seasketch -h 127.0.0.1 -U postgres h3
 
       - uses: actions/checkout@v3
 
