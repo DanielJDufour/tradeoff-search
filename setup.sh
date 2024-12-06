@@ -33,3 +33,7 @@ sudo -Hiu postgres psql -c 'SELECT ST_Point(-71.104, 42.315);'
 
 # create main sketches table
 sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
+
+# test pulling from sketches table
+sudo -Hiu postgres psql -c 'SELECT COUNT(*) FROM sketches'
+
