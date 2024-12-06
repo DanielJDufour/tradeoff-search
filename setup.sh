@@ -13,9 +13,3 @@ sudo systemctl start postgresql.service
 
 echo "testing database connection"
 sudo -u postgres psql -c 'SELECT 1;'
-
-# create database
-sudo -u postgres psql -c 'CREATE DATABASE seasketch;'
-
-# load h3 extension
-sudo -u postgres pgxn load -d seasketch h3
