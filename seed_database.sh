@@ -4,4 +4,4 @@ echo "starting database"
 sudo systemctl start postgresql.service
 
 echo "seeding sketches table"
-sudo -Hiu postgres psql < "$PWD/sql/seed.sql"
+sudo -Hiu postgres psql -U postgres < "$PWD/sql/seed.sql"
