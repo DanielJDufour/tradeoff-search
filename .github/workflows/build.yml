@@ -28,6 +28,9 @@ jobs:
 
       - name: set up table
         run: sh ./setup_table.sh
+
+      - name: seed database
+        run: sh ./seed_database.sh
       
       - run: sh ./run.sh
 
