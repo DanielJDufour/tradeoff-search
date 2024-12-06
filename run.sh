@@ -5,3 +5,6 @@ sudo systemctl start postgresql.service
 
 echo "creating materialize views and indices"
 sudo -Hiu postgres psql -d seasketch < "$PWD/v1/setup.sql"
+
+echo "run performance tests"
+sudo -Hiu postgres psql -d seasketch < "$PWD/v1/test.sql"
