@@ -3,6 +3,9 @@ CREATE EXTENSION IF NOT EXISTS postgis_raster;
 CREATE EXTENSION IF NOT EXISTS h3 CASCADE;
 CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
 
+--- debug
+SELECT * FROM pg_namespace;
+
 CREATE MATERIALIZED VIEW cell_data AS 
   SELECT
     sketches.id AS sketch_id,
