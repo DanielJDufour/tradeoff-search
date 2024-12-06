@@ -3,5 +3,5 @@
 echo "starting database"
 sudo systemctl start postgresql.service
 
-echo "creating sketches table"
+echo "seeding sketches table"
 sudo -Hiu postgres psql -d seasketch < "$PWD/sql/seed.sql"
