@@ -1,7 +1,7 @@
-CREATE EXTENSION postgis SCHEMA public;
-CREATE EXTENSION postgis_raster SCHEMA public;
-CREATE EXTENSION h3 CASCADE;
-CREATE EXTENSION h3_postgis CASCADE;
+-- CREATE EXTENSION postgis SCHEMA public;
+-- CREATE EXTENSION postgis_raster SCHEMA public;
+-- CREATE EXTENSION h3 CASCADE;
+-- CREATE EXTENSION h3_postgis CASCADE;
 
 --- debug
 SELECT * FROM pg_namespace;
@@ -26,7 +26,7 @@ CREATE MATERIALIZED VIEW cell_data AS
     cells7,
     cells9
   FROM sketches
-  LEFT JOIN LATERAL ST_Dump(geom) AS polys ON true
+  LEFT JOIN LATERAL ST_Dump(geom::geometry) AS polys ON true
   LEFT JOIN LATERAL ST_Area(polys.geom) AS poly_area ON true
   LEFT JOIN LATERAL h3_polygon_to_cells(polys.geom, 9) AS cells9 ON true
   LEFT JOIN LATERAL h3_cell_to_parent(cells9, 7) AS cells7 ON true
