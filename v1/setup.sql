@@ -41,11 +41,12 @@ UNION
 UNION
 (SELECT sketch_id, 9 AS res, cells9 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY sketch_id, cells9 ORDER BY sketch_id);
 
+SELECT * FROM cells LIMIT 5;
 
-DROP VIEW IF EXISTS sketch_weights;
 CREATE VIEW sketch_weights AS SELECT sketch_id, res, SUM(cell_weight) AS wt FROM cells GROUP BY sketch_id, res;
 
-DROP MATERIALIZED VIEW all_cells;
+SELECT * FROM sketch_weights LIMIT 5;
+
 CREATE MATERIALIZED VIEW all_cells AS 
 SELECT
   c.sketch_id,
@@ -60,7 +61,8 @@ CREATE INDEX idx_all_cells_sketch_res ON all_cells (res);
 CREATE INDEX idx_all_cells_cell_id ON all_cells (cell_id);
 CREATE INDEX idx_all_cells_cell_weight ON all_cells (cell_weight);
 
-DROP MATERIALIZED VIEW IF EXISTS sketch_geometry_hashes CASCADE;
+SELECT * FROM all_cells LIMIT 5;
+
 CREATE MATERIALIZED VIEW sketch_geometry_hashes AS 
   SELECT
     id AS sketch_id,
@@ -76,3 +78,5 @@ CREATE INDEX idx_sketch_geometry_hashes_sketch_id ON sketch_geometry_hashes (ske
 CREATE INDEX idx_sketch_geometry_hashes_num_geometries ON sketch_geometry_hashes (num_geometries);
 CREATE INDEX idx_sketch_geometry_hashes_poly_hash ON sketch_geometry_hashes (poly_hash);
 CREATE INDEX idx_sketch_geometry_hashes_wt ON sketch_geometry_hashes (wt);
+
+SELECT * FROM sketch_geometry_hashes LIMIT 5;
