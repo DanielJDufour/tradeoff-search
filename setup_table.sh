@@ -7,5 +7,9 @@ pwd
 
 ls -alsh .
 
+
+echo "ls -alsh sql"
+ls -alsh sql
+
 echo "creating sketches table"
 sudo -Hiu postgres psql -d seasketch -f ./sql/create_sketches_table.sql
