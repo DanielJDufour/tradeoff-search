@@ -5,3 +5,6 @@ CREATE EXTENSION IF NOT EXISTS postgis_raster;
 CREATE EXTENSION IF NOT EXISTS h3 CASCADE;
 
 CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
+
+--- check that postgis is installed properly
+SELECT ST_Point( -71.104, 42.315);
