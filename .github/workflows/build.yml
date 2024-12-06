@@ -14,17 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
     
-      - name: install packages
-        run: sh setup.sh
-
-      - name: set up test data
-        run: cd data/random-sketches && sh ./setup.sh
-
-      - name: set up sql scripts
-        run: cd sql && sh ./setup.sh
-
-      - name: seed database
-        run: sh ./seed_database.sh
+      - run: sh setup.sh
       
       - run: sh ./run.sh
 
