@@ -21,3 +21,16 @@ sudo -Hiu postgres psql -c 'SELECT version();'
 
 echo "testing psql version"
 psql --version
+
+su postgres -c "psql -c 'CREATE DATABASE seasketch'";
+su postgres -c "psql -c 'CREATE ROLE $(whoami) SUPERUSER LOGIN CREATEDB'";
+su postgres -c "psql -c 'ALTER DATABASE seasketch OWNER TO $(whoami)'";
+
+psql -c "CREATE EXTENSION postgis" seasketch;
+psql -c "CREATE EXTENSION postgis_raster" seasketch;
+psql -c "CREATE EXTENSION h3" seasketch;
+
+sudo systemctl restart postgresql.service
+
+
+
