@@ -11,43 +11,12 @@ jobs:
     permissions:
       contents: write
     name: main
-    services:
-      db:
-        image: postgis/postgis
-        env:
-          POSTGRES_DB: "seasketch"
-          POSTGRES_HOST_AUTH_METHOD: "trust"          
-          POSTGRES_USER: "postgres"
-        ports:
-          - 5432:5432          
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        volumes:
-          - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     steps:
-      - name: print ubuntu version
-        run: sudo lsb_release -a 
-    
+      - name: install packages
+        run: sh setup.sh
+        
       - name: test database connection
         run: psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
-
-      - run: sudo apt-get update
-
-      - run: apt-cache search h3
-      
-      - run: apt-cache search postgresql
-
-      - run: sudo apt-get install -y build-essential curl git
-      
-      - run: sudo apt-get install -y pgxnclient postgresql-14 postgresql-14-postgis-3 postgresql-server-dev-14
-
-      - run: sudo pgxn install h3
-
-      - run: sudo pgxn load -d seasketch -h 127.0.0.1 -U postgres h3
 
       - uses: actions/checkout@v3
 
