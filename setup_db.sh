@@ -4,11 +4,11 @@ echo "starting database"
 sudo systemctl start postgresql.service
 
 echo "creating seasketch database"
-sudo -Hiu postgres psql -c "CREATE DATABASE seasketch;"
+sudo -Hiu postgres psql -U postgres -c "CREATE DATABASE seasketch;"
 
 echo "creating extensions"
-sudo -Hiu postgres psql < "$PWD/sql/create_extensions.sql"
+sudo -Hiu postgres psql -U postgres seasketch < "$PWD/sql/create_extensions.sql"
 
 echo "loading h3 extension"
-# sudo -Hiu postgres pgxn load h3
+# sudo -Hiu postgres pgxn load -d seasketch -U postgres h3
 
