@@ -3,5 +3,5 @@
 echo "starting database"
 sudo systemctl start postgresql.service
 
-echo "creating extensions"
-sudo -Hiu postgres psql -U postgres < "$PWD/sql/create_extensions.sql"
+echo "creating postgis extension"
+sudo -Hiu postgres psql -c "CREATE EXTENSION postgis";
