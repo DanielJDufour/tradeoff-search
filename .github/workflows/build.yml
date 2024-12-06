@@ -19,13 +19,12 @@ jobs:
 
       - name: set up database
         run: sh setup_db.sh
-        
-      - name: test database connection
-        run: psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
 
-      - run: cd data/random-sketches && sh ./setup.sh
+      - name: set up test data
+        run: cd data/random-sketches && sh ./setup.sh
 
-      - run: ls ./data/random-sketches
+      - name: set up sql scripts
+        run: cd sql && sh ./setup.sh
       
       - run: sh ./run.sh
 
