@@ -6,7 +6,7 @@ sudo apt-get install -y build-essential curl git
 
 sudo apt-get install -y postgresql-common
 
-sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+echo | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
       
 sudo apt-get install -y pgxnclient postgresql-16 postgresql-client-16 postgresql-16-postgis-3 postgresql-server-dev-16       
 
