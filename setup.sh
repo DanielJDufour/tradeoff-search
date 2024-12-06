@@ -8,11 +8,11 @@ sudo apt-get install -y pgxnclient postgresql-14 postgresql-14-postgis-3 postgre
 
 sudo pgxn install h3
 
-# start postgresql database service
+echo "starting database"
 sudo systemctl start postgresql.service
 
-# test database connection
-psql -U postgres -c 'SELECT 1;'
+echo "testing database connection"
+sudo -u postgres psql -c 'SELECT 1;'
 
 # create database
 # psql -U postgres -c 'CREATE DATABASE ;'
