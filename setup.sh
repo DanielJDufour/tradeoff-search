@@ -30,6 +30,8 @@ sudo -Hiu postgres psql -c 'CREATE EXTENSION h3_postgis';
 
 # check that postgis is installed properly
 sudo -Hiu postgres psql -c 'SELECT ST_Point(-71.104, 42.315);'
+sudo -Hiu postgres psql -c 'SELECT ST_Dump(ST_Point(-71.104, 42.315));'
+
 
 # create main sketches table
 sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
