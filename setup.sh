@@ -39,3 +39,10 @@ sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
 # test pulling from sketches table
 sudo -Hiu postgres psql -c 'SELECT COUNT(*) FROM sketches'
 
+# download random sketches
+sh -c "cd data/random-sketches && sh ./setup.sh"
+
+# unzip seed.sql
+sh -c "cd sql && unzip seed.sql.zip"
+
+sudo -Hiu postgres psql < ./sql/seed.sql
