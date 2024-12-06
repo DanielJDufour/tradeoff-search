@@ -1,7 +1,7 @@
-CREATE EXTENSION IF NOT EXISTS postgis;
-CREATE EXTENSION IF NOT EXISTS postgis_raster;
-CREATE EXTENSION IF NOT EXISTS h3 CASCADE;
-CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
+CREATE EXTENSION postgis SCHEMA public;
+CREATE EXTENSION postgis_raster SCHEMA public;
+CREATE EXTENSION h3 CASCADE;
+CREATE EXTENSION h3_postgis CASCADE;
 
 --- debug
 SELECT * FROM pg_namespace;
@@ -9,6 +9,8 @@ SELECT * FROM pg_namespace;
 -- SELECT format('%I.%I(%s)', ns.nspname, p.proname, oidvectortypes(p.proargtypes)) 
 -- FROM pg_proc p INNER JOIN pg_namespace ns ON (p.pronamespace = ns.oid)
 -- WHERE ns.nspname = 'public';
+
+SELECT current_user;
 
 SELECT * FROM pg_authid;
 
