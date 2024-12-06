@@ -4,13 +4,13 @@ CREATE EXTENSION IF NOT EXISTS h3 CASCADE;
 CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
 
 --- debug
--- SELECT * FROM pg_namespace;
+--- SELECT * FROM pg_namespace;
 
 -- SELECT format('%I.%I(%s)', ns.nspname, p.proname, oidvectortypes(p.proargtypes)) 
 -- FROM pg_proc p INNER JOIN pg_namespace ns ON (p.pronamespace = ns.oid)
 -- WHERE ns.nspname = 'public';
 
--- SHOW search_path;
+SHOW search_path;
 
 CREATE MATERIALIZED VIEW cell_data AS 
   SELECT
