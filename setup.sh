@@ -12,4 +12,4 @@ echo "starting database"
 sudo systemctl start postgresql.service
 
 echo "testing database connection"
-sudo -u postgres psql -c 'SELECT 1;'
+sudo -Hiu postgres psql -c 'SELECT 1;'
