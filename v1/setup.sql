@@ -3,8 +3,7 @@ CREATE EXTENSION IF NOT EXISTS postgis_raster;
 CREATE EXTENSION IF NOT EXISTS h3 CASCADE;
 CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
 
-CREATE MATERIALIZED VIEW cells AS 
-WITH cell_data AS(
+CREATE MATERIALIZED VIEW cell_data AS 
   SELECT
     sketches.id AS sketch_id,
     poly_area,
@@ -20,8 +19,9 @@ WITH cell_data AS(
   LEFT JOIN LATERAL h3_cell_to_parent(cells9, 7) AS cells7 ON true
   LEFT JOIN LATERAL h3_cell_to_parent(cells7, 5) AS cells5 ON true
   LEFT JOIN LATERAL h3_cell_to_parent(cells5, 3) AS cells3 ON true
-  LEFT JOIN LATERAL h3_cell_to_parent(cells3, 0) AS cells0 ON true
-)
+  LEFT JOIN LATERAL h3_cell_to_parent(cells3, 0) AS cells0 ON true;
+
+CREATE MATERIALIZED VIEW cells AS 
 (SELECT sketch_id, 0 AS res, cells0 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY sketch_id, cells0 ORDER BY sketch_id)
 UNION
 (SELECT sketch_id, 3 AS res, cells3 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY sketch_id, cells3 ORDER BY sketch_id)
