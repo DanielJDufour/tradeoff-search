@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get install -y build-essential curl git
 
 # remove default (older version of) postgresql
-sudo apt-get --purge remove postgresql
+sudo apt-get --purge remove postgresql-14
 
 echo | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
       
