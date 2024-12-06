@@ -1,20 +1,17 @@
--- CREATE EXTENSION postgis SCHEMA public;
--- CREATE EXTENSION postgis_raster SCHEMA public;
--- CREATE EXTENSION h3 CASCADE;
--- CREATE EXTENSION h3_postgis CASCADE;
+SELECT ST_Dump(ST_Point(-71.104, 42.315));
 
---- debug
-SELECT * FROM pg_namespace;
+-- --- debug
+-- SELECT * FROM pg_namespace;
 
--- SELECT format('%I.%I(%s)', ns.nspname, p.proname, oidvectortypes(p.proargtypes)) 
--- FROM pg_proc p INNER JOIN pg_namespace ns ON (p.pronamespace = ns.oid)
--- WHERE ns.nspname = 'public';
+-- -- SELECT format('%I.%I(%s)', ns.nspname, p.proname, oidvectortypes(p.proargtypes)) 
+-- -- FROM pg_proc p INNER JOIN pg_namespace ns ON (p.pronamespace = ns.oid)
+-- -- WHERE ns.nspname = 'public';
 
-SELECT current_user;
+-- SELECT current_user;
 
-SELECT * FROM pg_authid;
+-- SELECT * FROM pg_authid;
 
-SHOW search_path;
+-- SHOW search_path;
 
 CREATE MATERIALIZED VIEW cell_data AS 
   SELECT
