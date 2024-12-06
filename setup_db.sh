@@ -6,9 +6,9 @@ sudo systemctl start postgresql.service
 echo "creating seasketch database"
 sudo -Hiu postgres psql -c "CREATE DATABASE seasketch;"
 
-echo "creating postgis extension"
-sudo -Hiu postgres psql seasketch -c "CREATE EXTENSION postgis;"
+echo "creating extensions"
+sudo -Hiu postgres psql -d seasketch < "$PWD/sql/create_extensions.sql"
 
 echo "loading h3 extension"
-sudo -Hiu postgres pgxn load -d seasketch h3
+# sudo -Hiu postgres pgxn load -d seasketch h3
 
