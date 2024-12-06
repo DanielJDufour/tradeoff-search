@@ -17,17 +17,11 @@ jobs:
       - name: install packages
         run: sh setup.sh
 
-      - name: set up database
-        run: sh setup_db.sh
-
       - name: set up test data
         run: cd data/random-sketches && sh ./setup.sh
 
       - name: set up sql scripts
         run: cd sql && sh ./setup.sh
-
-      - name: set up table
-        run: sh ./setup_table.sh
 
       - name: seed database
         run: sh ./seed_database.sh
