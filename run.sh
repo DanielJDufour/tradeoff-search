@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-PG_HOST="127.0.0.1"
+echo "starting database"
+sudo systemctl start postgresql.service
 
-psql -h $PG_HOST -p 5432 --username postgres seasketch < ./sql/create_extensions.sql
-
-#sh -c "cd ./scripts && ./create_extensions.sh"
+echo "creating materialize views and indices"
+sudo -Hiu postgres psql -d seasketch < "$PWD/v1/setup.sql"
