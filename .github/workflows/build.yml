@@ -12,13 +12,13 @@ jobs:
       contents: write
     name: main
     steps:
+      - uses: actions/checkout@v3
+    
       - name: install packages
         run: sh setup.sh
         
       - name: test database connection
         run: psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
-
-      - uses: actions/checkout@v3
 
       - run: cd data/random-sketches && sh ./setup.sh
 
