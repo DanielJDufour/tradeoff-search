@@ -26,11 +26,13 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
+        volumes:
+          - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     steps:
-      - run: sudo lsb_release -a 
+      - name: print ubuntu version
+        run: sudo lsb_release -a 
     
-      - name: Test database connection
+      - name: test database connection
         run: psql -h 127.0.0.1 -d seasketch -U postgres -c 'SELECT 1;'
 
       - run: sudo apt-get update
