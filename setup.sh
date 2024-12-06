@@ -15,6 +15,7 @@ echo "testing database connection"
 sudo -u postgres psql -c 'SELECT 1;'
 
 # create database
-# psql -U postgres -c 'CREATE DATABASE ;'
+sudo -u postgres psql -c 'CREATE DATABASE seasketch;'
 
-# sudo pgxn load -d seasketch -U postgres h3
+# load h3 extension
+sudo -u postgres pgxn load -d seasketch h3
