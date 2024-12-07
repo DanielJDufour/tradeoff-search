@@ -48,3 +48,5 @@ sh -c "cd sql && unzip -qq seed.sql.zip"
 sudo -Hiu postgres psql < ./sql/seed.sql
 
 sudo -Hiu postgres psql < ./v1/setup.sql
+
+sudo -Hiu postgres psql < ./v1/test.sql
