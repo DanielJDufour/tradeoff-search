@@ -23,10 +23,8 @@ UNION
 UNION
 (SELECT sketch_id, 7 AS res, cells7 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY sketch_id, cells7 ORDER BY sketch_id);
 
-DROP VIEW IF EXISTS sketch_weights;
 CREATE VIEW sketch_weights AS SELECT sketch_id, res, SUM(cell_weight) AS wt FROM cells GROUP BY sketch_id, res;
 
-DROP MATERIALIZED VIEW all_cells;
 CREATE MATERIALIZED VIEW all_cells AS 
 SELECT
   c.sketch_id,
@@ -41,7 +39,6 @@ CREATE INDEX idx_all_cells_sketch_res ON all_cells (res);
 CREATE INDEX idx_all_cells_cell_id ON all_cells (cell_id);
 CREATE INDEX idx_all_cells_cell_weight ON all_cells (cell_weight);
 
-DROP MATERIALIZED VIEW IF EXISTS sketch_geometry_hashes CASCADE;
 CREATE MATERIALIZED VIEW sketch_geometry_hashes AS 
   SELECT
     id AS sketch_id,
