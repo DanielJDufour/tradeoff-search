@@ -1,6 +1,6 @@
 \timing
 
-WITH t AS (SELECT * FROM all_cells WHERE sketch_id = 1234),
+WITH t AS (SELECT * FROM all_cells WHERE sketch_id = 1234)
 SELECT
   a.sketch_id,
   .05 * (0.5 * SUM(CASE WHEN a.res = 0 THEN a.cell_weight ELSE 0 END) + 0.5 * SUM(CASE WHEN t.res = 0 THEN t.cell_weight ELSE 0 END))
