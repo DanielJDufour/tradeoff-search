@@ -45,7 +45,7 @@ sh -c "cd data/random-sketches && sh ./setup.sh"
 # unzip seed.sql
 sh -c "cd sql && unzip -qq seed.sql.zip"
 
-sudo -Hiu postgres psql < ./sql/seed.sql
+sudo -Hiu postgres psql -q < ./sql/seed.sql
 
 sudo -Hiu postgres psql < ./v1/setup.sql
 
