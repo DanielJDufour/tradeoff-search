@@ -39,6 +39,10 @@ CREATE INDEX idx_all_cells_sketch_res ON all_cells (res);
 CREATE INDEX idx_all_cells_cell_id ON all_cells (cell_id);
 CREATE INDEX idx_all_cells_cell_weight ON all_cells (cell_weight);
 
+--- need to create unique index in order to enable refresh materialize view concurrently
+CREATE UNIQUE INDEX idx_all_cells_sketch_id_and_cell_id ON all_cells (sketch_id, cell_id);
+
+
 CREATE MATERIALIZED VIEW sketch_geometry_hashes AS 
   SELECT
     id AS sketch_id,
