@@ -84,7 +84,7 @@ $func$
     GROUP BY s.sketch_id
   ) x ON a.sketch_id = x.sketch_id
   GROUP BY a.sketch_id
-  ORDER BY sim DESC
+  ORDER BY similarity DESC
   LIMIT 10;
 $func$
 LANGUAGE sql IMMUTABLE;
