@@ -55,7 +55,7 @@ CREATE INDEX idx_sketch_geometry_hashes_num_geometries ON sketch_geometry_hashes
 CREATE INDEX idx_sketch_geometry_hashes_poly_hash ON sketch_geometry_hashes (poly_hash);
 CREATE INDEX idx_sketch_geometry_hashes_wt ON sketch_geometry_hashes (wt);
 
-CREATE TYPE similar_sketch AS (sketch_id bigint, simlarity double precision);
+CREATE TYPE similar_sketch AS (sketch_id bigint, similarity double precision);
 
 CREATE OR REPLACE FUNCTION get_similar_sketches(
   A_SKETCH_ID bigint,
@@ -72,7 +72,7 @@ $func$
     + RES_0_WEIGHT * (0.5 * SUM(CASE WHEN a.res = 0 THEN a.cell_weight ELSE 0 END) + 0.5 * SUM(CASE WHEN t.res = 0 THEN t.cell_weight ELSE 0 END))
     + RES_3_WEIGHT * (0.5 * SUM(CASE WHEN a.res = 3 THEN a.cell_weight ELSE 0 END) + 0.5 * SUM(CASE WHEN t.res = 3 THEN t.cell_weight ELSE 0 END))
     + RES_5_WEIGHT * (0.5 * SUM(CASE WHEN a.res = 5 THEN a.cell_weight ELSE 0 END) + 0.5 * SUM(CASE WHEN t.res = 5 THEN t.cell_weight ELSE 0 END))
-    + RES_7_WEIGHT * (0.5 * SUM(CASE WHEN a.res = 7 THEN a.cell_weight ELSE 0 END) + 0.5 * SUM(CASE WHEN t.res = 7 THEN t.cell_weight ELSE 0 END)) AS sim
+    + RES_7_WEIGHT * (0.5 * SUM(CASE WHEN a.res = 7 THEN a.cell_weight ELSE 0 END) + 0.5 * SUM(CASE WHEN t.res = 7 THEN t.cell_weight ELSE 0 END)) AS similarity
   FROM all_cells a
   INNER JOIN (SELECT * FROM all_cells WHERE sketch_id = A_SKETCH_ID) t ON a.cell_id = t.cell_id
   LEFT JOIN (
