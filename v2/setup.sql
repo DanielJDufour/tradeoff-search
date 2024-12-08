@@ -23,6 +23,8 @@ UNION
 UNION
 (SELECT sketch_id, 7 AS res, cells7 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY sketch_id, cells7 ORDER BY sketch_id);
 
+CREATE UNIQUE INDEX idx_cells_sketch_id_and_cell_id ON cells (sketch_id, cell_id);
+
 CREATE VIEW sketch_weights AS SELECT sketch_id, res, SUM(cell_weight) AS wt FROM cells GROUP BY sketch_id, res;
 
 CREATE MATERIALIZED VIEW all_cells AS 
