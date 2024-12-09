@@ -1,11 +1,13 @@
 \timing
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY cells;
-SELECT pg_sleep(60);
-REFRESH MATERIALIZED VIEW CONCURRENTLY all_cells;
-SELECT pg_sleep(60);
-REFRESH MATERIALIZED VIEW CONCURRENTLY sketch_geometry_hashes;
+VACUUM cells;
 
+REFRESH MATERIALIZED VIEW CONCURRENTLY all_cells;
+VACUUM all_cells;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY sketch_geometry_hashes;
+VACUUM sketch_geometry_hashes;
 
 SELECT * FROM get_similar_sketches(1);
 SELECT * FROM get_similar_sketches(1234);
