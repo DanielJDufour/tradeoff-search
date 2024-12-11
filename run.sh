@@ -53,4 +53,5 @@ sudo -Hiu postgres psql -q < ./sql/seed.sql
 
 sudo -Hiu postgres psql < ./v2/setup.sql
 sudo -Hiu postgres psql < ./v2/test.sql
+sudo -Hiu postgres psql < ./v2/refresh.sql
 
