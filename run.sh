@@ -21,22 +21,22 @@ sudo systemctl start postgresql.service
 echo "logging postgresql version"
 sudo -Hiu postgres psql -c 'SELECT version();'
 
-echo "logging postgis version"
-sudo -Hiu postgres psql -c 'SELECT PostGIS_full_version();'
-
 echo "testing psql version"
 psql --version
 
 sudo -Hiu postgres psql -c 'CREATE DATABASE seasketch';
 sudo -Hiu postgres psql -c 'CREATE EXTENSION postgis';
 sudo -Hiu postgres psql -c 'CREATE EXTENSION postgis_raster';
-sudo -Hiu postgres psql -c 'CREATE EXTENSION h3';
-sudo -Hiu postgres psql -c 'CREATE EXTENSION h3_postgis';
+
+echo "logging postgis version"
+sudo -Hiu postgres psql -c 'SELECT PostGIS_full_version();'
 
 # check that postgis is installed properly
 sudo -Hiu postgres psql -c 'SELECT ST_Point(-71.104, 42.315);'
 sudo -Hiu postgres psql -c 'SELECT ST_Dump(ST_Point(-71.104, 42.315));'
 
+sudo -Hiu postgres psql -c 'CREATE EXTENSION h3';
+sudo -Hiu postgres psql -c 'CREATE EXTENSION h3_postgis';
 
 # create main sketches table
 sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
