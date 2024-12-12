@@ -50,6 +50,10 @@ sudo -Hiu postgres psql -q < ./sql/seed.sql
 # seed collection, a sketch with null geometry
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 
+# add really small geometry
+sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (ST_GeomFromText('POLYGON((0 0, 0.00000001 0.00000001,
+0.00000001 0, 0 0))'));"
+
 # sudo -Hiu postgres psql < ./v1/setup.sql
 # sudo -Hiu postgres psql < ./v1/test.sql
 # sudo -Hiu postgres psql < ./v1/test2.sql
