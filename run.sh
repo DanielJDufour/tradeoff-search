@@ -18,8 +18,11 @@ sudo pgxn install h3
 echo "starting database"
 sudo systemctl start postgresql.service
 
-echo "testing database connection"
+echo "logging postgresql version"
 sudo -Hiu postgres psql -c 'SELECT version();'
+
+echo "logging postgis version"
+sudo -Hiu postgres psql -c 'SELECT PostGIS_full_version();'
 
 echo "testing psql version"
 psql --version
