@@ -8,8 +8,10 @@ sudo apt-get install -y build-essential curl git
 sudo apt-get --purge remove postgresql-14
 
 echo | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+
+PG_VERSION=17;
       
-sudo apt-get install -y pgxnclient postgresql-16 postgresql-client-16 postgresql-16-postgis-3 postgresql-server-dev-16      
+sudo apt-get install -y pgxnclient postgresql-$PG_VERSION postgresql-client-$PG_VERSION postgresql-$PG_VERSION-postgis-3 postgresql-server-dev-$PG_VERSION     
 
 sudo pgxn install h3
 
