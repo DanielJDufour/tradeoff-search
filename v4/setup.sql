@@ -15,7 +15,7 @@ $func$
       cells7
     FROM ST_Dump(geom) polys
     LEFT JOIN LATERAL ST_Area(polys.geom) AS poly_area ON true
-    LEFT JOIN LATERAL h3_polygon_to_cells(polys.geom, 7) AS cells7 ON true
+    LEFT JOIN LATERAL h3_polygon_to_cells(polys.geom::polygon, ARRAY[]::polygon[], 7) AS cells7 ON true
     LEFT JOIN LATERAL h3_cell_to_parent(cells7, 5) AS cells5 ON true
     LEFT JOIN LATERAL h3_cell_to_parent(cells5, 3) AS cells3 ON true
     LEFT JOIN LATERAL h3_cell_to_parent(cells3, 0) AS cells0 ON true
