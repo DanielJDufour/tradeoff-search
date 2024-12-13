@@ -4,32 +4,6 @@ CREATE TYPE sketch_cell AS (
   cell_weight float
 );
 
-CREATE OR REPLACE FUNCTION get_sketch_cells(geom geometry) RETURNS SETOF sketch_cell AS
-$func$
-  WITH cell_data AS (
-    SELECT
-      poly_area,
-      cells0,
-      cells3,
-      cells5,
-      cells7
-    FROM ST_Dump(geom) polys
-    LEFT JOIN LATERAL ST_Area(polys.geom) AS poly_area ON true
-    LEFT JOIN LATERAL h3_polygon_to_cells(polys.geom::polygon, ARRAY[]::polygon[], 7) AS cells7 ON true
-    LEFT JOIN LATERAL h3_cell_to_parent(cells7, 5) AS cells5 ON true
-    LEFT JOIN LATERAL h3_cell_to_parent(cells5, 3) AS cells3 ON true
-    LEFT JOIN LATERAL h3_cell_to_parent(cells3, 0) AS cells0 ON true
-  )
-  (SELECT 0 AS res, cells0 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells0 IS NOT NULL GROUP BY cells0)
-  UNION
-  (SELECT 3 AS res, cells3 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells3 IS NOT NULL GROUP BY cells3)
-  UNION
-  (SELECT 5 AS res, cells5 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells5 IS NOT NULL GROUP BY cells5)
-  UNION
-  (SELECT 7 AS res, cells7 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells7 IS NOT NULL GROUP BY cells7);
-$func$
-LANGUAGE sql IMMUTABLE;
-
 CREATE MATERIALIZED VIEW cells AS 
   SELECT
     id AS sketch_id,
@@ -37,7 +11,29 @@ CREATE MATERIALIZED VIEW cells AS
     cells.cell_id as cell_id,
     cells.cell_weight as cell_weight
   FROM sketches
-  LEFT JOIN LATERAL get_sketch_cells(geom) cells ON true;
+  LEFT JOIN LATERAL (
+    WITH cell_data AS (
+      SELECT
+        poly_area,
+        cells0,
+        cells3,
+        cells5,
+        cells7
+      FROM ST_Dump(geom) AS polys
+      LEFT JOIN LATERAL ST_Area(polys.geom) AS poly_area ON true
+      LEFT JOIN LATERAL h3_polygon_to_cells(polys.geom::polygon, ARRAY[]::polygon[], 7) AS cells7 ON true
+      LEFT JOIN LATERAL h3_cell_to_parent(cells7, 5) AS cells5 ON true
+      LEFT JOIN LATERAL h3_cell_to_parent(cells5, 3) AS cells3 ON true
+      LEFT JOIN LATERAL h3_cell_to_parent(cells3, 0) AS cells0 ON true
+    )
+    (SELECT 0 AS res, cells0 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells0 IS NOT NULL GROUP BY cells0)
+    UNION
+    (SELECT 3 AS res, cells3 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells3 IS NOT NULL GROUP BY cells3)
+    UNION
+    (SELECT 5 AS res, cells5 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells5 IS NOT NULL GROUP BY cells5)
+    UNION
+    (SELECT 7 AS res, cells7 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data WHERE cells7 IS NOT NULL GROUP BY cells7)    
+  ) cells ON true;
 
 CREATE UNIQUE INDEX idx_cells_sketch_id_and_cell_id ON cells (sketch_id, cell_id);
 
