@@ -35,6 +35,8 @@ $func$
 $func$
 LANGUAGE sql IMMUTABLE;
 
+ALTER FUNCTION get_sketch_cells(geom geometry) SET search_path = 'public';
+
 CREATE MATERIALIZED VIEW cells AS 
   SELECT
     id AS sketch_id,
