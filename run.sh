@@ -34,6 +34,7 @@ sudo -Hiu postgres psql -c 'SELECT PostGIS_full_version();'
 # check that postgis is installed properly
 sudo -Hiu postgres psql -c 'SELECT ST_Point(-71.104, 42.315);'
 sudo -Hiu postgres psql -c 'SELECT ST_Dump(ST_Point(-71.104, 42.315));'
+sudo -Hiu postgres psql -c "SELECT ST_Dump(ST_GeomFromText('POLYGON((0 0, 0.00000001 0.00000001, 0.00000001 0, 0 0))'));"
 
 sudo -Hiu postgres psql -c 'CREATE EXTENSION h3';
 sudo -Hiu postgres psql -c 'CREATE EXTENSION h3_postgis';
