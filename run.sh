@@ -36,6 +36,7 @@ sudo -Hiu postgres psql -c "SELECT ST_Dump(ST_GeomFromText('POLYGON((0 0, 0.0000
 
 sudo -Hiu postgres psql -c 'CREATE EXTENSION h3';
 sudo -Hiu postgres psql -c 'CREATE EXTENSION h3_postgis';
+sudo -Hiu postgres psql -c "ALTER FUNCTION h3_polygon_to_cells(multi geometry, resolution integer) SET search_path = 'public'";
 
 # create main sketches table
 sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
