@@ -59,6 +59,9 @@ sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (ST_GeomFromText('POLYGON((0 0, 0.00000001 0.00000001,
 0.00000001 0, 0 0))'));"
 
+# geometry with duplicate polygons
+sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (ST_GeomFromText('MULTIPOLYGON (((30 20, 45 40, 10 40, 30 20)),((30 20, 45 40, 10 40, 30 20)))'));"
+
 # sudo -Hiu postgres psql < ./v1/setup.sql
 # sudo -Hiu postgres psql < ./v1/test.sql
 # sudo -Hiu postgres psql < ./v1/test2.sql
