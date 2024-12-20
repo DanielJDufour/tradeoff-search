@@ -71,6 +71,7 @@ CREATE UNIQUE INDEX idx_all_cells_sketch_id_and_cell_id ON all_cells (sketch_id,
 CREATE MATERIALIZED VIEW sketch_geometry_hashes AS 
   SELECT
     id AS sketch_id,
+    dumped.path AS poly_path,
     poly_hash,
     num_geometries,
     1 / num_geometries::float AS wt
@@ -83,7 +84,7 @@ CREATE INDEX idx_sketch_geometry_hashes_sketch_id ON sketch_geometry_hashes (ske
 CREATE INDEX idx_sketch_geometry_hashes_num_geometries ON sketch_geometry_hashes (num_geometries);
 CREATE INDEX idx_sketch_geometry_hashes_poly_hash ON sketch_geometry_hashes (poly_hash);
 CREATE INDEX idx_sketch_geometry_hashes_wt ON sketch_geometry_hashes (wt);
-CREATE UNIQUE INDEX sketch_geometry_hashes_sketch_id_and_poly_hash ON sketch_geometry_hashes (sketch_id, poly_hash);
+CREATE UNIQUE INDEX sketch_geometry_hashes_unique ON sketch_geometry_hashes (sketch_id, poly_path, poly_hash);
 
 CREATE TYPE similar_sketch AS (sketch_id bigint, similarity double precision);
 
