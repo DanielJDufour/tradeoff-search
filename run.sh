@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+PG_VERSION=13;
+
 sudo apt-get update
 
 sudo apt-get install -y build-essential curl git
@@ -9,8 +11,6 @@ sudo apt-get --purge remove postgresql-14*
 sudo apt-get --purge remove postgresql-16*
 
 echo | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-
-PG_VERSION=17;
       
 sudo apt-get install -y postgresql-$PG_VERSION postgresql-client-$PG_VERSION postgresql-$PG_VERSION-postgis-3 postgresql-server-dev-$PG_VERSION postgresql-$PG_VERSION-h3     
 
