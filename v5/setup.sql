@@ -109,7 +109,7 @@ $func$
   LEFT JOIN (
     SELECT
     s.sketch_id,
-    COUNT(*)::float / (any_value(s.num_geometries) + any_value(t2.num_geometries) - COUNT(*)) AS sim -- jaccard similarity of geom hashes
+    COUNT(*)::float / (MAX(s.num_geometries) + MAX(t2.num_geometries) - COUNT(*)) AS sim -- jaccard similarity of geom hashes
     FROM sketch_geometry_hashes s
     INNER JOIN (SELECT * FROM sketch_geometry_hashes WHERE sketch_id = A_SKETCH_ID) t2 ON s.poly_hash = t2.poly_hash
     GROUP BY s.sketch_id
