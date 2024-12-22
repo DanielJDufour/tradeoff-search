@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-PG_VERSION=17;
+PG_VERSION=13;
 
 sudo apt-get update
 
