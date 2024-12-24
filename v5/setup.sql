@@ -37,14 +37,15 @@ LANGUAGE sql IMMUTABLE;
 
 ALTER FUNCTION get_sketch_cells(geom geometry) SET search_path = 'public';
 
-CREATE MATERIALIZED VIEW cells AS 
+CREATE MATERIALIZED VIEW cells AS   
   SELECT
     id AS sketch_id,
     cells.res AS res,
     cells.cell_id as cell_id,
     cells.cell_weight as cell_weight
-  FROM sketches
-  LEFT JOIN LATERAL get_sketch_cells(geom) cells ON true;
+  FROM (SELECT id, geom FROM sketches WHERE geom IS NOT NULL AND NOT ST_IsEmpty(geom) AND ST_IsValid(geom))
+  LEFT JOIN LATERAL get_sketch_cells(geom) cells ON true
+  WHERE res IS NOT NULL AND cell_id IS NOT NULL;
 
 CREATE UNIQUE INDEX idx_cells_sketch_id_and_cell_id ON cells (sketch_id, cell_id);
 
