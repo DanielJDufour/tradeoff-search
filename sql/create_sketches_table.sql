@@ -31,5 +31,6 @@ CREATE TABLE sketches (
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     -- post_id integer,
     shared_in_forum boolean DEFAULT false NOT NULL,
-    bbox real[] GENERATED ALWAYS AS (create_bbox(COALESCE(geom, user_geom), id)) STORED
+    bbox real[] GENERATED ALWAYS AS (create_bbox(COALESCE(geom, user_geom), id)) STORED,
+    area float GENERATED ALWAYS AS (ST_Area(geom)) STORED
 );
