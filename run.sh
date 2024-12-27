@@ -50,8 +50,11 @@ sh -c "cd data/random-sketches && sh ./setup.sh"
 
 # unzip seed.sql
 sh -c "cd sql && unzip -qq seed.sql.zip"
-
 sudo -Hiu postgres psql -q < ./sql/seed.sql
+
+# unzip seed_50k.sql
+sh -c "cd sql && unzip -qq seed_50k.sql.zip"
+sudo -Hiu postgres psql -q < ./sql/seed_50k.sql
 
 # seed collection, a sketch with null geometry
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
