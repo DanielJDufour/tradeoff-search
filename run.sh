@@ -86,6 +86,9 @@ sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 # sudo -Hiu postgres psql < ./v4/test.sql
 # sudo -Hiu postgres psql < ./v4/refresh.sql
 
+echo "running ./v5/setup.sql"
 sudo -Hiu postgres psql < ./v5/setup.sql
+echo "running ./v5/test.sql"
 sudo -Hiu postgres psql < ./v5/test.sql
+echo "running ./v5/refresh.sql"
 sudo -Hiu postgres psql < ./v5/refresh.sql
