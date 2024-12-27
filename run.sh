@@ -45,13 +45,6 @@ sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
 # test pulling from sketches table
 sudo -Hiu postgres psql -c 'SELECT COUNT(*) FROM sketches'
 
-# download random sketches
-# sh -c "cd data/random-sketches && sh ./setup.sh"
-
-# unzip seed.sql
-# sh -c "cd sql && unzip -qq seed.sql.zip"
-# sudo -Hiu postgres psql -q < ./sql/seed.sql
-
 echo "seeding 10k random geojson"
 sudo -Hiu postgres psql -q < ./sql/seed_10k.sql
 echo "finished seeding 10k random geojson"
@@ -70,25 +63,9 @@ sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (ST_GeomFromText(
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 
-# sudo -Hiu postgres psql < ./v1/setup.sql
-# sudo -Hiu postgres psql < ./v1/test.sql
-# sudo -Hiu postgres psql < ./v1/test2.sql
-
-# sudo -Hiu postgres psql < ./v2/setup.sql
-# sudo -Hiu postgres psql < ./v2/test.sql
-# sudo -Hiu postgres psql < ./v2/refresh.sql
-
-# sudo -Hiu postgres psql < ./v3/setup.sql
-# sudo -Hiu postgres psql < ./v3/test.sql
-# sudo -Hiu postgres psql < ./v3/refresh.sql
-
-# sudo -Hiu postgres psql < ./v4/setup.sql
-# sudo -Hiu postgres psql < ./v4/test.sql
-# sudo -Hiu postgres psql < ./v4/refresh.sql
-
-echo "running ./v5/setup.sql"
-sudo -Hiu postgres psql < ./v5/setup.sql
-echo "running ./v5/test.sql"
-sudo -Hiu postgres psql < ./v5/test.sql
-echo "running ./v5/refresh.sql"
-sudo -Hiu postgres psql < ./v5/refresh.sql
+echo "running ./v6/setup.sql"
+sudo -Hiu postgres psql < ./v6/setup.sql
+echo "running ./v6/test.sql"
+sudo -Hiu postgres psql < ./v6/test.sql
+echo "running ./v6/refresh.sql"
+sudo -Hiu postgres psql < ./v6/refresh.sql
