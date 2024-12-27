@@ -1,0 +1,9 @@
+\timing
+
+\echo 'starting refresh.sql'
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY cells;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY all_cells;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY sketch_geometry_hashes;

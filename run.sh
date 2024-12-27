@@ -63,9 +63,9 @@ sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (ST_GeomFromText(
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 
-echo "running ./v6/setup.sql"
-sudo -Hiu postgres psql < ./v6/setup.sql
-echo "running ./v6/test.sql"
-sudo -Hiu postgres psql < ./v6/test.sql
-echo "running ./v6/refresh.sql"
-sudo -Hiu postgres psql < ./v6/refresh.sql
+echo "running ./v7/setup.sql"
+sudo -Hiu postgres psql < ./v7/setup.sql
+echo "running ./v7/test.sql"
+sudo -Hiu postgres psql < ./v7/test.sql
+echo "running ./v7/refresh.sql"
+sudo -Hiu postgres psql < ./v7/refresh.sql
