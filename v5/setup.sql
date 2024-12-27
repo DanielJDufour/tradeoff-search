@@ -37,6 +37,7 @@ LANGUAGE sql IMMUTABLE;
 
 ALTER FUNCTION get_sketch_cells(geom geometry) SET search_path = 'public';
 
+\echo 'creating materialized view cells'
 CREATE MATERIALIZED VIEW cells AS   
   SELECT
     id AS sketch_id,
@@ -49,8 +50,10 @@ CREATE MATERIALIZED VIEW cells AS
 
 CREATE UNIQUE INDEX idx_cells_sketch_id_and_cell_id ON cells (sketch_id, cell_id);
 
+\echo 'creating view sketch_weights'
 CREATE VIEW sketch_weights AS SELECT sketch_id, res, SUM(cell_weight) AS wt FROM cells GROUP BY sketch_id, res;
 
+\echo 'creating materialized view all_cells'
 CREATE MATERIALIZED VIEW all_cells AS 
 SELECT
   c.sketch_id,
@@ -68,7 +71,7 @@ CREATE INDEX idx_all_cells_cell_weight ON all_cells (cell_weight);
 --- need to create unique index in order to enable refresh materialize view concurrently
 CREATE UNIQUE INDEX idx_all_cells_sketch_id_and_cell_id ON all_cells (sketch_id, cell_id);
 
-
+\echo 'creating materialized view sketch_geometry_hashes'
 CREATE MATERIALIZED VIEW sketch_geometry_hashes AS 
   SELECT
     id AS sketch_id,
@@ -89,6 +92,7 @@ CREATE UNIQUE INDEX sketch_geometry_hashes_unique ON sketch_geometry_hashes (ske
 
 CREATE TYPE similar_sketch AS (sketch_id bigint, similarity double precision);
 
+\echo 'creating get_similar_sketches'
 CREATE OR REPLACE FUNCTION get_similar_sketches(
   A_SKETCH_ID bigint,
   HASH_WEIGHT float default 0.25,
