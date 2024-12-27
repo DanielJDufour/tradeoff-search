@@ -138,6 +138,7 @@ DECLARE
     i float;
 BEGIN
     i := ST_Area(ST_Intersection(a, b));
+    IF i = 0 THEN RETURN 0; END IF;
     RETURN i / (a_area + b_area - i);
 END;
 $function$
