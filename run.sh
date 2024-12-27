@@ -46,11 +46,11 @@ sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
 sudo -Hiu postgres psql -c 'SELECT COUNT(*) FROM sketches'
 
 # download random sketches
-sh -c "cd data/random-sketches && sh ./setup.sh"
+# sh -c "cd data/random-sketches && sh ./setup.sh"
 
 # unzip seed.sql
-sh -c "cd sql && unzip -qq seed.sql.zip"
-sudo -Hiu postgres psql -q < ./sql/seed.sql
+# sh -c "cd sql && unzip -qq seed.sql.zip"
+# sudo -Hiu postgres psql -q < ./sql/seed.sql
 
 # unzip seed_50k.sql
 sh -c "cd sql && unzip -qq seed_50k.sql.zip"
