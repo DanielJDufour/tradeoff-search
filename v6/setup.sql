@@ -163,7 +163,7 @@ $func$
     AS similarity
   FROM all_cells a
   INNER JOIN (
-    SELECT s.id AS sketch_id, geometry_vector_similarity(s.geom, c.geom, s.area, c.area) AS sim FROM sketches s, (SELECT geom, area FROM sketches WHERE id = A_SKETCH_ID LIMIT 1) c WHERE s.geom IS NOT NULL AND ST_IsValid(s.geom) AND ST_Intersects(s.geom, c.geom) ORDER BY sim DESC LIMIT 10  
+    SELECT s.id AS sketch_id, geometry_vector_similarity(s.geom, c.geom, s.area, c.area) AS sim FROM sketches s, (SELECT geom, area FROM sketches WHERE id = A_SKETCH_ID LIMIT 1) c WHERE s.geom IS NOT NULL AND ST_IsValid(s.geom) AND ST_IsValid(c.geom) AND ST_Intersects(s.geom, c.geom) ORDER BY sim DESC LIMIT 10  
   ) v ON v.sketch_id = a.sketch_id
   INNER JOIN (SELECT * FROM all_cells WHERE sketch_id = A_SKETCH_ID) t ON a.cell_id = t.cell_id
   LEFT JOIN (
