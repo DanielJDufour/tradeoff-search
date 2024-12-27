@@ -52,9 +52,9 @@ sudo -Hiu postgres psql -c 'SELECT COUNT(*) FROM sketches'
 # sh -c "cd sql && unzip -qq seed.sql.zip"
 # sudo -Hiu postgres psql -q < ./sql/seed.sql
 
-# unzip seed_25k.sql
-sh -c "cd sql && unzip -qq seed_25k.sql.zip"
-sudo -Hiu postgres psql -q < ./sql/seed_25k.sql
+# unzip seed_10k.sql
+sh -c "cd sql && unzip -qq seed_10k.sql.zip"
+sudo -Hiu postgres psql -q < ./sql/seed_10k.sql
 
 # seed collection, a sketch with null geometry
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
