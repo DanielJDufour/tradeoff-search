@@ -34,3 +34,6 @@ CREATE TABLE sketches (
     bbox real[] GENERATED ALWAYS AS (create_bbox(COALESCE(geom, user_geom), id)) STORED,
     area float GENERATED ALWAYS AS (ST_Area(geom)) STORED
 );
+
+--- create r-tree index
+CREATE INDEX sketches_geom_idx ON sketches USING GIST (geom);
