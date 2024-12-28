@@ -17,7 +17,7 @@ $func$
       SELECT
         polys.geom AS geom
       FROM ST_Dump(geom) polys
-      WHERE polys.geom IS NOT NULL AND NOT ST_IsEmpty(polys.geom) AND ST_IsValid(polys.geom) AND GeometryType(polys.geom) = 'POLYGON' AND ST_Area(polys.geom) > 0
+      WHERE polys.geom IS NOT NULL AND NOT ST_IsEmpty(polys.geom) AND ST_IsValid(polys.geom) AND GeometryType(polys.geom) = 'POLYGON' AND ST_Area(polys.geom) > 0 AND ST_XMin(polys.geom) >= -180 AND ST_XMax(polys.geom) <= 180
     ) valid_polys
     LEFT JOIN LATERAL ST_Area(valid_polys.geom) AS poly_area ON true
     LEFT JOIN LATERAL h3_polygon_to_cells(valid_polys.geom, 7) AS cells7 ON true
