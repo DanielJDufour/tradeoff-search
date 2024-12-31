@@ -77,8 +77,7 @@ CREATE MATERIALIZED VIEW sketch_geometry_hashes AS
     id AS sketch_id,
     dumped.path AS poly_path,
     poly_hash,
-    num_geometries,
-    1 / num_geometries::float AS wt
+    num_geometries
   FROM sketches
   LEFT JOIN LATERAL ST_NumGeometries(geom) AS num_geometries ON true
   LEFT JOIN LATERAL ST_Dump(geom) AS dumped ON true
@@ -87,7 +86,6 @@ CREATE MATERIALIZED VIEW sketch_geometry_hashes AS
 CREATE INDEX idx_sketch_geometry_hashes_sketch_id ON sketch_geometry_hashes (sketch_id);
 CREATE INDEX idx_sketch_geometry_hashes_num_geometries ON sketch_geometry_hashes (num_geometries);
 CREATE INDEX idx_sketch_geometry_hashes_poly_hash ON sketch_geometry_hashes (poly_hash);
-CREATE INDEX idx_sketch_geometry_hashes_wt ON sketch_geometry_hashes (wt);
 CREATE UNIQUE INDEX sketch_geometry_hashes_unique ON sketch_geometry_hashes (sketch_id, poly_path, poly_hash);
 
 CREATE TYPE similar_sketch AS (sketch_id bigint, similarity double precision);
