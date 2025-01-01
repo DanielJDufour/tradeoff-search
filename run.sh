@@ -45,9 +45,9 @@ sudo -Hiu postgres psql < ./sql/create_sketches_table.sql
 # test pulling from sketches table
 sudo -Hiu postgres psql -c 'SELECT COUNT(*) FROM sketches'
 
-echo "seeding 10k random geojson"
-sudo -Hiu postgres psql -q < ./sql/seed_10k.sql
-echo "finished seeding 10k random geojson"
+echo "seeding 5k random geojson"
+sudo -Hiu postgres psql -q < ./sql/seed_5k.sql
+echo "finished seeding 5k random geojson"
 
 # seed collection, a sketch with null geometry
 sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
