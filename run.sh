@@ -66,9 +66,9 @@ sudo -Hiu postgres psql -c "INSERT INTO sketches (geom) VALUES (NULL);"
 echo "Free space:"
 df -h
 
-echo "running ./v7/setup.sql"
-sudo -Hiu postgres psql < ./v7/setup.sql
-echo "running ./v7/test.sql"
-sudo -Hiu postgres psql < ./v7/test.sql
-echo "running ./v7/refresh.sql"
-sudo -Hiu postgres psql < ./v7/refresh.sql
+echo "running ./v8/setup.sql"
+sudo -Hiu postgres psql < ./v8/setup.sql
+echo "running ./v8/test.sql"
+sudo -Hiu postgres psql < ./v8/test.sql
+echo "running ./v8/refresh.sql"
+sudo -Hiu postgres psql < ./v8/refresh.sql
