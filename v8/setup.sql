@@ -29,9 +29,7 @@ $func$
   UNION
   (SELECT 3 AS res, cells3 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY cells3)
   UNION
-  (SELECT 5 AS res, cells5 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY cells5)
-  UNION
-  (SELECT 7 AS res, cells7 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY cells7);
+  (SELECT 5 AS res, cells5 AS cell_id, MAX(1 / poly_area) AS cell_weight FROM cell_data GROUP BY cells5);
 $func$
 LANGUAGE sql IMMUTABLE;
 
